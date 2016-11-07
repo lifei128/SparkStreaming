@@ -1,0 +1,139 @@
+CREATE TABLE emp (
+  emp_id int,
+  f_name text,
+  l_name text,
+  f4 boolean,
+  PRIMARY KEY ((emp_id), l_name, f_name, f4)
+);
+
+INSERT INTO rajsarka.emp (emp_id, f_name, l_name, f4) 
+VALUES (1, 'Soumyakanti', 'Das', TRUE);
+
+INSERT INTO rajsarka.emp (emp_id, f_name, l_name, f4) 
+VALUES (2, 'Rajarshi', 'Sarkar', TRUE);
+
+INSERT INTO rajsarka.emp (emp_id, f_name, l_name, f4) 
+VALUES (3, 'Aniket', 'Udepurkar', FALSE);
+
+INSERT INTO rajsarka.emp (emp_id, f_name, l_name, f4) 
+VALUES (4, 'Himanshu', 'Choudhary', TRUE);
+
+
+INSERT INTO rajsarka.emp (emp_id, f_name, l_name, f4) 
+VALUES (100, 'R', 'S', TRUE);
+
+
+
+UPDATE rajsarka.emp SET column_to_change = 'RANDOM CHANGE' WHERE emp_id = 100 and
+f_name = 'R' and l_name = 'S' and f4 = true;
+
+alter table rajsarka.emp add column_to_change text;
+
+
+CREATE TABLE log_table (
+  datetime timestamp,
+  user_id text,
+  session_id int,
+  ref_page text,
+  land_page text,
+  time_spent double,
+  age int,
+  PRIMARY KEY ((user_id), datetime, session_id)
+);
+
+drop table log_table;
+
+
+create type rajsarka.address(
+county text,
+city text,
+latitude text,
+longitude text);
+
+create type rajsarka.element(
+  count int,
+  total_time double,
+  flag boolean,
+  name text
+);
+
+create type rajsarka.engagement(
+  cat_1 frozen <element>,
+  cat_2 frozen <element>,
+  cat_3 frozen <element>,
+  cat_4 frozen <element>,
+  cat_5 frozen <element>,
+  cat_6 frozen <element>
+);
+
+create type rajsarka.conversion(
+  cat_1 frozen <element>,
+  cat_2 frozen <element>,
+  cat_3 frozen <element>,
+  cat_4 frozen <element>,
+  cat_5 frozen <element>,
+  cat_6 frozen <element>
+);
+
+create type rajsarka.retention(
+  cat_1 frozen <element>,
+  cat_2 frozen <element>,
+  cat_3 frozen <element>,
+  cat_4 frozen <element>,
+  cat_5 frozen <element>,
+  cat_6 frozen <element>
+);
+
+create type rajsarka.list_of_pages(
+  urls list<text>
+);
+
+CREATE TABLE user_table (
+  user_id text PRIMARY KEY,
+  e_V text,
+  e_H text,
+  e_C text,
+  e_R text,
+  e_F text,
+  e_O text,
+  c_V text,
+  c_H text,
+  c_C text,
+  c_R text,
+  c_F text,
+  r_V text,
+  r_H text,
+  r_C text,
+  r_R text,
+  r_F text,
+);
+
+CREATE TABLE test_table (
+  user_id text PRIMARY KEY,
+  details text
+);
+
+INSERT INTO rajsarka.user_table(user_id, e_V, e_H, e_c, e_r, e_f, e_o, c_V, c_h, c_C, c_r, c_f, r_V, r_h, r_c, r_R, r_f) VALUES ('DEF', '1,2,3', '1,2,3', '1,2,3', '1,2,3', '1,2,3', '1,2,3', '1,2,3', '1,2,3', '1,2,3', '1,2,3', '1,2,3', '1,2,3', '1,2,3', '1,2,3', '1,2,3', '1,2,3');
+
+update rajsarka.test_table set e_V = (2,3,1) where user_id = 'ABC'
+
+INSERT INTO rajsarka.user_table (user_id, age, gender, location, land_page, e, c, r) 
+VALUES ('3', 15,'M',{county: 'San Diego', city: 'SD', latitude: '1.2', longitude: '2.1'},
+{123 : {urls: ['url1']}},
+{cat_1: {count: 1, total_time: 2.2, flag: true, name: 'cat1_e'}},
+{cat_1: {count: 1, total_time: 2.2, flag: false, name: 'cat1_c'}},
+{cat_1: {count: 1, total_time: 2.2, flag: true, name: 'cat1_r'}}
+);
+
+update rajsarka.user_table set land_page = land_page + {123: {urls = ['url1']}} where user_id = '3' and location = {county: 'San Diego', city: 'SD', latitude: '1.2', longitude: '2.1'};
+
+create type rajsarka.details(
+  category text,
+  total_time double,
+  count int
+);
+
+create table user_details_table(
+    user_id text PRIMARY KEY,
+    info list<frozen <details>>
+);
